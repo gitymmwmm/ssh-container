@@ -3,9 +3,10 @@ FROM alpine:latest
 # Аргумент для задания порта SSH (по умолчанию 22)
 ARG SSH_PORT=22
 
-# Обновляем сертификаты и устанавливаем OpenSSH сервер
+# Обновляем сертификаты и устанавливаем OpenSSH сервер и Python
 RUN apk add --no-cache ca-certificates && \
-    apk add --no-cache openssh-server
+    apk add --no-cache openssh-server python3 && \
+    ln -sf /usr/bin/python3 /usr/bin/python
 
 # Создаём директорию для ключей пользователя root
 RUN mkdir -p /root/.ssh && chmod 700 /root/.ssh
